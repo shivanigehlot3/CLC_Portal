@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student Standings</title>
+    <link rel="stylesheet" href="../css/standing.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🏆 Top 15 Students</h1>
+        <div class="filters">
+            <div class="filter-container">
+                <label for="branchFilter">Filter by Branch:</label>
+                <select id="branchFilter">
+                    <option value="all">All</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Management">Management</option>
+                    <option value="Forensic Science">Forensic Science</option>
+                    <option value="Law">Law</option>
+                    <option value="Pharmacy">Pharmacy</option>
+                    <option value="Mass Communication">Mass Communication</option>
+                </select>
+            </div>
+
+            <div class="filter-container">
+                <label for="rankSort">Sort by Rank:</label>
+                <select id="rankSort">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="cards-container" id="student-cards">
+            
+        </div>
+        
+    </div>
+
+    <script src="../js/standing.js"></script>
+</body>
+</html>

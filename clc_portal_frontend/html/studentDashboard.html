@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="../css/studentDashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="../assets/degree.png" alt="College Counselling" style="width: 90px; margin: 10px auto; display: block;">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showSection('profile')"><i class="fas fa-user"></i> <span>My Profile</span></a></li>
+                <li><a href="#" onclick="showSection('seat-matrix')"><i class="fas fa-th"></i> <span>Seat Matrix</span></a></li>
+                <li><a href="#" onclick="goToStanding()"><i class="fas fa-chart-bar"></i> <span>Standings</span></a></li>
+                <li><a href="#" onclick="showSection('updates')"><i class="fas fa-file-alt"></i> <span>Counseling Updates</span></a></li>
+                <li><a href="#" onclick="showSection('branch-leaderboard')"><i class="fas fa-folder"></i> <span>My Position</span></a></li>
+                <!-- <li><a href="#" onclick="showSection('contact')"><i class="fas fa-envelope"></i> <span>Contact Counselor</span></a></li> -->
+            </ul>
+            <div class="logout">
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Welcome back, Student!</h1>
+                <p>Always stay updated in your student portal.</p>
+            </header>
+
+            <section id="profile" class="content-section section active">
+                <div class="card">
+                    <h2>Personal Information</h2>
+                    <p><strong>Name:</strong> <span id="user-name"></span></p>
+                    <p><strong>Roll Number:</strong> <span id="roll-number"></span></p>
+                    <p><strong>Father's Name:</strong> <span id="father-name"></span></p>
+                    <p><strong>Email:</strong> <span id="user-email"></span></p>
+                    <p><strong>Phone:</strong> <span id="user-phone"></span></p>
+                    <p><strong>DOB:</strong> <span id="dob"></span></p>
+                    <p><strong>Address:</strong> <span id="user-address"></span></p>
+                    <p><strong>Applied for Branch:</strong> <span id="branch-name"></span></p>
+                    <p><strong>Rank:</strong> <span id="rank"></span></p>
+                </div>
+            </section>
+
+            <section id="seat-matrix" class="content-section section">
+                <h2>Seat Matrix</h2>
+                <table id="seat-matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Branch</th>
+                            <th>Total Seats</th>
+                            <th>Filled Seats</th>
+                            <th>Available Seats</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- dynamic -->
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="standings" class="content-section section">
+                <iframe id="standings-frame" src="standing.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+            </section>
+            
+            <section id="branch-leaderboard" class="content-section section leaderboard">
+                <div class="leaderboard-header">Your Position</div>
+                <table id="leaderboard-table" class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Roll Number</th>
+                            <th>Branch</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="position">1</td>
+                            <td class="player-name">Lawrence O. Sanders</td>
+                            <td>2018-01-21</td>
+                            <td class="branch">Computer Science</td>
+                        </tr>
+                        <tr class="logged-in-student">
+                            <td class="position">2</td>
+                            <td class="player-name">Shivani</td>
+                            <td>2018-01-23</td>
+                            <td class="branch">Mechanical</td>
+                        </tr>
+                        <tr>
+                            <td class="position">3</td>
+                            <td class="player-name">Teresa Torres</td>
+                            <td>2018-01-24</td>
+                            <td class="branch">Electrical</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div id="student-message"></div>
+            </section>
+            
+            
+        </main>
+    </div>
+
+    <script src="../js/studentDashboard.js"></script>
+</body>
+
+
+</html>

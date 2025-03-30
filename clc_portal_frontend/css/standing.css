@@ -1,0 +1,128 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    background: #d4f1f4;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    text-align: center;
+    color: #05445e;
+}
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+label {
+    font-weight: bold;
+    color: #05445e;
+}
+
+select {
+    padding: 6px 8px;
+    border: none;
+    border-radius: 8px;
+    background: #75e6da;
+    color: #05445e;
+    cursor: pointer;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);  /* Shadow added */
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 10px;
+    color: #05445e;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.rank {
+    background: #05445e;
+    color: #d4f1f4;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    animation: bounce 0.8s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.info {
+    margin: 5px 0;
+}
+
+.status {
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 8px;
+    color: white;
+}
+
+.qualified {
+    background: #184723;
+}
+
+.waitlisted {
+    background: #fdce41;
+    color: #212529;
+}
+
+.not-qualified {
+    background: #fb4255;
+}
+
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CLC Portal - Login/Register</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <form id="registerForm" class="form active">
+            <h2>Register</h2>
+            <div class="form-group">
+                <label for="registerRole"><i class="fas fa-user-tag"></i> Role</label>
+                <select id="registerRole" required>
+                    <option value="student">Student</option>
+                    <option value="officer">Admission Officer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="registerIdentifierInput"><i class="fas fa-id-badge"></i>Identifier</label>
+                <input type="text" id="registerIdentifierInput" placeholder="Roll Number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registerPassword"><i class="fas fa-lock"></i>Password</label>
+                <input type="password" id="registerPassword" placeholder="Password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword"><i class="fas fa-lock"></i>Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+
+            <div id="studentFields">
+                <div class="form-group">
+                    <label for="registerName"><i class="fas fa-user"></i>Name</label>
+                    <input type="text" id="registerName" placeholder="Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail"><i class="fas fa-envelope"></i>Email</label>
+                    <input type="email" id="registerEmail" placeholder="Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPhoneNumber"><i class="fas fa-phone"></i>Phone Number</label>
+                    <input type="text" id="registerPhoneNumber" placeholder="Phone Number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerAddress"><i class="fas fa-map-marker-alt"></i>Address</label>
+                    <input type="text" id="registerAddress" placeholder="Address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerFatherName"><i class="fas fa-user"></i>Father’s Name</label>
+                    <input type="text" id="registerFatherName" placeholder="Father's Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerDob"><i class="fas fa-calendar-alt"></i>Date of Birth</label>
+                    <input type="date" id="registerDob" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerBranch"><i class="fas fa-graduation-cap"></i> Branch</label>
+                    <select id="registerBranch" required>
+                        <option value="" disabled selected>Select Branch</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Management">Management</option>
+                        <option value="Forensic Science">Forensic Science</option>
+                        <option value="Law">Law</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Mass Communication">Mass Communication</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="registerRank"><i class="fas fa-trophy"></i>Rank</label>
+                    <input type="number" id="registerRank" placeholder="Rank" required>
+                </div>
+            </div>
+
+            <div id="officerAdminFields" style="display: none;">
+                <div class="form-group">
+                    <label for="officerName"><i class="fas fa-user"></i>Name</label>
+                    <input type="text" id="officerName" name="officerName" placeholder="Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="officerEmail"><i class="fas fa-envelope"></i>Email</label>
+                    <input type="email" id="officerEmail" name="officerEmail" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                    <label for="officerPhoneNumber"><i class="fas fa-phone"></i>Phone Number</label>
+                    <input type="text" id="officerPhoneNumber" name="officerPhoneNumber" placeholder="Phone Number">
+                </div>
+            </div>
+
+            <button type="submit">Register</button>
+            <p class="toggle-text">Already have an account? <a href="#" id="loginLink">Login here</a></p>
+        </form>
+
+        <form id="loginForm" class="form">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="loginRole"><i class="fas fa-user-tag"></i>Role</label>
+                <select id="loginRole" required>
+                    <option value="student">Student</option>
+                    <option value="officer">Admission Officer</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="loginIdentifierInput"><i class="fas fa-id-badge"></i>Identifier</label>
+                <input type="text" id="loginIdentifierInput" placeholder="Roll Number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="loginPassword"><i class="fas fa-lock"></i>Password</label>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+            </div>
+
+            <button type="submit">Login</button>
+            <p class="toggle-text">Don’t have an account? <a href="#" id="registerLink">Register here</a></p>
+        </form>
+    </div>
+
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popupMessage"></p>
+            <button id="closePopup">OK</button>
+        </div>
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>
