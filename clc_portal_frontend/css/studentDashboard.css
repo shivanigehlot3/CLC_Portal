@@ -13,7 +13,6 @@
 
 .sidebar {
     width: 180px;
-    height: 100vh;
     background: linear-gradient(135deg, #05445e, #189ab4);
     color: white;
     padding: 15px;
@@ -22,6 +21,11 @@
     justify-content: space-between;
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
 }
 .logo {
     font-size: 18px;
