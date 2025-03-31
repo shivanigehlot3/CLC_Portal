@@ -7,12 +7,15 @@
     width: 180px;
     background: #1f2937;
     color: white;
-    height: 100vh;
     padding: 15px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 .sidebar img {
@@ -298,81 +301,18 @@ input:focus {
     }
 }
 
-#student-actions {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    margin: 20px auto;
-    text-align: center;
-}
-
-.student-card {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.student-card h3 {
-    color: #333;
-    margin-bottom: 8px;
-}
-
-.student-card p {
-    font-size: 14px;
-    color: #555;
-    margin: 4px 0;
-}
-
-.action-buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
-.admit-btn, .skip-btn {
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.admit-btn {
-    background: #28a745;
-    color: white;
-    margin-right: 10px;
-}
-
-.skip-btn {
-    background: #dc3545;
-    color: white;
-}
-
-.admit-btn:hover {
-    background: #218838;
-}
-
-.skip-btn:hover {
-    background: #c82333;
-}
 
 .title {
-    color: #333;
-    margin-bottom: 20px;
+    color: #05445e;
+    font-size: 24px;
+    margin-bottom: 15px;
 }
 
-/* Button Styling */
 #load-students-btn {
-    background-color: #007bff;
+    background: #189ab4;
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
@@ -380,42 +320,45 @@ input:focus {
 }
 
 #load-students-btn:hover {
-    background-color: #0056b3;
+    background: #05445e;
 }
 
 .table-container {
-    margin: 20px auto;
-    max-width: 800px;
     overflow-x: auto;
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
 }
 
 .styled-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.styled-table thead {
+    background: #05445e;
+    color: white;
 }
 
 .styled-table th, .styled-table td {
     padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #189ab4;
+    text-align: center;
 }
 
-.styled-table th {
-    background-color: #007bff;
+.styled-table tbody tr:nth-child(odd) {
+    background: #d4f1f4;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background: #75e6da;
+}
+
+.styled-table tbody tr:hover {
+    background: #189ab4;
     color: white;
-}
-
-.styled-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.styled-table tr:hover {
-    background-color: #f1f1f1;
+    transition: 0.3s;
 }
 
 .logout {
@@ -439,4 +382,12 @@ input:focus {
 .logout a:hover {
     background: #cc0000;
     transform: scale(1.05);
+}
+
+.iframe-standing-action {
+    width: 100%; 
+    height: 80vh;
+    border: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
