@@ -15,6 +15,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findTop15ByOrderByRankAsc();
 
     List<Student> findByBranchOrderByRankAsc(String branch);
+    List<Student> findByBranchAndAdmittedFalse(String branch);
+    List<Student> findByAdmittedTrue();
+
 
     @Query(value = "SELECT * FROM student s WHERE s.documents_valid = true AND s.admitted = false ORDER BY s.rank ASC LIMIT 1", nativeQuery = true)
     Optional<Student> findEligibleStudent();
