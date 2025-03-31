@@ -165,137 +165,43 @@ async function updateStudentDetails(event) {
     }
 }
 
-
-async function loadAdmittedStudents() {
-    try {
-        const response = await fetch("http://localhost:9091/students/admitted");
-        const admittedStudents = await response.json();
-
-        let tableBody = document.getElementById("admitted-students-table");
-        tableBody.innerHTML = "";
-
-        admittedStudents.forEach(student => {
-            let row = `<tr>
-                        <td>${student.rollNumber}</td>
-                        <td>${student.name}</td>
-                        <td>${student.email}</td>
-                        <td>${student.admissionDate}</td>
-                       </tr>`;
-            tableBody.innerHTML += row;
-        });
-    } catch (error) {
-        console.error("Error fetching admitted students:", error);
-    }
-}
-
 function logout() {
     localStorage.removeItem("officerId");
     window.location.href = "login.html";
 }
 
-
-
-let students = [];
-let currentIndex = 0;
-
-async function fetchStudents() {
-try {
-const response = await fetch('http://localhost:9091/students');
-students = await response.json();
-if (students.length > 0) {
-    loadStudent();
-} else {
-    document.getElementById("student-details").innerHTML = "<p>No students available.</p>";
-    document.querySelector(".action-buttons").style.display = "none";
-}
-} catch (error) {
-console.error("Error fetching student data:", error);
-document.getElementById("student-details").innerHTML = "<p>Error loading students.</p>";
-}
-}
-
-function loadStudent() {
-if (currentIndex < students.length) {
-let student = students[currentIndex];
-document.querySelector("h3#student-name").textContent = student.name;
-document.querySelector("span#student-roll").textContent = student.rollNumber; // Fixed roll number key
-document.querySelector("span#student-branch").textContent = student.branch;
-document.querySelector("span#student-rank").textContent = student.rank;
-document.querySelector("span#student-status").textContent = student.status;
-document.querySelector("p#status-message").textContent = "";
-} else {
-document.getElementById("student-details").innerHTML = "<p>No more students to process.</p>";
-document.querySelector(".action-buttons").style.display = "none";
-}
-}
-
-async function admitStudent() {
-if (currentIndex < students.length) {
-let student = students[currentIndex];
-try {
-    console.log(`${student.admissionStatus}`);
-    const response = await fetch(`http://localhost:9091/students/admit/${student.rollNumber}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" }
-    });
-
-    let responseData;
+document.getElementById("load-students-btn").addEventListener("click", async function () {
     try {
-        responseData = await response.json();
-    } catch (jsonError) {
-        responseData = { message: "Invalid response from server" };
+        const response = await fetch("http://localhost:9091/students/admitted");
+        if (!response.ok) {
+            throw new Error("Failed to fetch admitted students.");
+        }
+
+        const admittedStudents = await response.json();
+        console.log("✅ Admitted Students Fetched:", admittedStudents);
+
+        const tableBody = document.getElementById("admitted-students-table");
+        tableBody.innerHTML = "";
+
+        if (admittedStudents.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='4'>No admitted students available.</td></tr>";
+            return;
+        }
+
+        admittedStudents.forEach(student => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${student.rollNumber || "N/A"}</td>
+                <td>${student.name || "N/A"}</td>
+                <td>${student.email || "N/A"}</td>
+                <td>${student.branch || "N/A"}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("❌ Error fetching admitted students:", error);
     }
-
-    if (response.ok) {
-        document.getElementById("status-message").textContent = `${student.name} has been admitted!`;
-        console.log("✅ Admission successful:", responseData);
-        currentIndex++;
-        setTimeout(loadStudent, 1000);
-    } else {
-        const errorMessage = responseData.message || "Unknown error";
-        document.getElementById("status-message").textContent = `Failed to admit ${student.name}: ${errorMessage}`;
-        console.error("❌ Admission failed:", responseData);
-    }
-} catch (error) {
-    console.error("⚠️ Error admitting student:", error);
-    document.getElementById("status-message").textContent = "Error connecting to server.";
-}
-}
-}
-
-async function skipStudent() {
-// console.log("skip fn called");
-if (currentIndex < students.length) {
-let student = students[currentIndex];
-console.log("Skipping student:", student);
-console.log(`${student.rollNumber}`);
-
-try {
-    const response = await fetch(`http://localhost:9091/students/skip/${student.rollNumber}`, { 
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ roll: student.roll, status: "Skipped" })
-    });
-
-    if (response.ok) {
-        document.getElementById("status-message").textContent = `${student.name} has been skipped!`;
-    } else {
-        console.error("Error: API did not return success.", response.status);
-    }
-} catch (error) {
-    console.error("Error skipping student:", error);
-}
-
-currentIndex++;
-console.log("Current Index after skipping:", currentIndex);
-
-if (currentIndex < students.length) {
-    setTimeout(loadStudent, 1000);
-} else {
-    document.getElementById("student-details").innerHTML = "<p>No more students to process.</p>";
-    document.querySelector(".action-buttons").style.display = "none";
-}
-}
-}
+});
 
 window.onload = fetchStudents;
