@@ -107,34 +107,43 @@ public class StudentService {
         return studentRepository.save(existingStudent);
     }
 
+
     @Transactional
-    public Optional<Student> admitStudent(String rollNumber) {
+    public Student admitStudent(String rollNumber, String branch) {
         Student student = studentRepository.findByRollNumber(rollNumber)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found"));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found"));
+
+        if (!student.getBranch().equalsIgnoreCase(branch)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Cannot admit student from a different branch");
+        }
+
+        if (student.isAdmitted()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student is already admitted");
+        }
 
         if (!student.isDocumentsValid()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Admission Failed: Documents are not valid.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Documents are not valid");
         }
 
-        SeatMatrix seatMatrix = student.getSeatMatrix();
-        if (seatMatrix == null) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "SeatMatrix data missing for student.");
+        SeatMatrix seatMatrix = seatMatrixRepository.findByBranch(branch)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Seat matrix not found"));
+
+        if (seatMatrix.getFilledSeats() >= seatMatrix.getTotalSeats()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No vacant seats available");
         }
 
-        if (seatMatrix.getFilledSeats() < seatMatrix.getTotalSeats()) {
-//            student.setAdmitted(true); //
-            student.setAdmissionStatus("admitted");
-            seatMatrix.setFilledSeats(seatMatrix.getFilledSeats() + 1);
+        student.setAdmitted(true);
+        seatMatrix.setFilledSeats(seatMatrix.getFilledSeats() + 1);
 
-            studentRepository.save(student);
-            seatMatrixRepository.save(seatMatrix);
+        studentRepository.save(student);
+        seatMatrixRepository.save(seatMatrix);
 
-            return Optional.of(student);
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Admission Failed: No vacant seats available.");
-        }
+        return student;
     }
 
+    public List<Student> getPendingStudentsByBranch(String branch) {
+        return studentRepository.findByBranchAndAdmittedFalse(branch);
+    }
     public int getStudentFilledSeats(String rollNumber) {
         Student student = studentRepository.findByRollNumber(rollNumber)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found"));
@@ -170,6 +179,11 @@ public class StudentService {
         mailMessage.setText(message);
         mailSender.send(mailMessage);
         */
+    }
+    
+    
+    public List<Student> getAdmittedStudents() {
+        return studentRepository.findByAdmittedTrue();
     }
 
 }
