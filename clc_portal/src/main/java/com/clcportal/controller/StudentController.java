@@ -100,35 +100,6 @@ public class StudentController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
-    @PutMapping("/admit/{rollNumber}")
-    public ResponseEntity<?> admitStudent(@PathVariable String rollNumber) {
-        Optional<Student> studentOpt = studentService.admitStudent(rollNumber);
-
-        if (studentOpt.isPresent()) {
-            Student student = studentOpt.get();
-           
-            System.out.println("Student Status Before Admission: " + student.getAdmissionStatus());
-            if ("admitted".equalsIgnoreCase(student.getAdmissionStatus())) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("message", "Student is already admitted!"));
-            }
-            student.setAdmissionStatus("admitted");
-            studentService.save(student); 
-
-            AdmittedStudent admittedStudent = new AdmittedStudent(
-                student.getRollNumber(), student.getName(), student.getEmail(), LocalDate.now()
-            );
-            admittedStudentRepository.save(admittedStudent);
-
-            studentService.sendNotification(student.getEmail(), "Congratulations! You have been admitted! 🎉");
-
-            return ResponseEntity.ok(student);
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Map.of("message", "Student not found!"));
-        }
-    }
-
     @PostMapping("/skip/{rollNumber}")
     public ResponseEntity<Student> skipStudent(@PathVariable String rollNumber) {
         Optional<Student> nextStudent = studentService.findNextEligibleStudent();
@@ -136,13 +107,18 @@ public class StudentController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
-    @GetMapping("/filled-seats/{rollNumber}")
-    public int getFilledSeats(@PathVariable String rollNumber) {
-        return studentService.getStudentFilledSeats(rollNumber);
-    }
     
     @GetMapping("/admitted")
-    public List<AdmittedStudent> getAdmittedStudents() {
-        return admittedStudentRepository.findAll();
+    public ResponseEntity<List<Student>> getAdmittedStudents() {
+        List<Student> admittedStudents = studentService.getAdmittedStudents();
+        return ResponseEntity.ok(admittedStudents);
     }
+   
+    @PutMapping("/admit/{rollNumber}/{branch}")
+    public ResponseEntity<?> admitStudent(@PathVariable String rollNumber, @PathVariable String branch) {
+        Student admittedStudent = studentService.admitStudent(rollNumber, branch);
+        return ResponseEntity.ok(admittedStudent);
+    }
+
+  
 }
