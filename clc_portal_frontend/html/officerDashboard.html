@@ -47,25 +47,12 @@
                     </tbody>
                 </table>
             </section>
+
             
             <section id="student-actions" class="content-section">
-                <h2>Student Actions</h2>
-            
-                <div id="student-details" class="student-card">
-                    <h3 id="student-name">Loading...</h3>
-                    <p><strong>Roll Number:</strong> <span id="student-roll"></span></p>
-                    <p><strong>Branch:</strong> <span id="student-branch"></span></p>
-                    <p><strong>Rank:</strong> <span id="student-rank"></span></p>
-                    <p><strong>Status:</strong> <span id="student-status"></span></p>
-                </div>
-            
-                <p id="status-message" style="color: green; font-weight: bold;"></p>
-            
-                <div class="action-buttons">
-                    <button class="admit-btn" onclick="admitStudent()">✅ Admit</button>
-                    <button class="skip-btn" onclick="skipStudent()">⏭️ Skip</button>
-                </div>
+                <iframe src="studentAction.html" class="iframe-standing-action"></iframe>
             </section>
+
 
             <section id="update-student" class="content-section">
                 <div class="form-container">
@@ -131,17 +118,17 @@
                 <button id="load-students-btn">Load Admitted Students</button>
             
                 <div class="table-container">
-                    <table id="admitted-students-table" class="styled-table">
+                    <table class="styled-table">
                         <thead>
                             <tr>
                                 <th>Roll Number</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Admission Date</th>
+                                <th>Branch</th>
                             </tr>
                         </thead>
                         <tbody id="admitted-students-table">
-                            <!-- dynamic -->
+                            <!-- Data will be inserted dynamically here -->
                         </tbody>
                     </table>
                 </div>
