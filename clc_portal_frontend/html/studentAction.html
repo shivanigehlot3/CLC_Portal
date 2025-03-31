@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admit or Skip Student</title>
+    <link rel="stylesheet" href="../css/studentAction.css">
+</head>
+<body>
+    <section id="student-actions" class="content-section">
+        <h2>Officer Actions</h2>
+
+        <label for="branch-select"><strong>Select Branch:</strong></label>
+        <select id="branch-select" onchange="filterStudentsByBranch()">
+            <option value="" disabled selected>Select Branch</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Management">Management</option>
+                <option value="Forensic Science">Forensic Science</option>
+                <option value="Law">Law</option>
+                <option value="Pharmacy">Pharmacy</option>
+                <option value="Mass Communication">Mass Communication</option>
+        </select>
+    
+        <div id="student-details" class="student-card">
+            <h3 id="student-name">Loading...</h3>
+            <p><strong>Roll Number:</strong> <span id="student-roll"></span></p>
+            <p><strong>Branch:</strong> <span id="student-branch"></span></p>
+            <p><strong>Rank:</strong> <span id="student-rank"></span></p>
+            <p><strong>Status:</strong> <span id="student-status"></span></p>
+        </div>
+    
+        <div class="action-buttons">
+            <button class="admit-btn" onclick="admitStudent()">✅ Admit</button>
+            <button class="skip-btn" onclick="skipStudent()">⏭️ Skip</button>
+        </div>
+
+        <div>
+            <p id="status-message"></p>
+        </div>
+    </section>
+
+    <script src="../js/studentAction.js"></script>
+</body>
+</html>
