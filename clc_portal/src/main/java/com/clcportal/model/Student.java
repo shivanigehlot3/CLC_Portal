@@ -46,29 +46,22 @@ public class Student {
     
     @JsonProperty("dob")
     private LocalDate dob;
-    
-//    @Column(nullable = false)
-//    @JsonProperty("standing")
-//    private String standing;  // Qualified, Waitlisted, Not Qualified
+   
 
     @Column
     private String status;
     
     @Column(name = "documentsValid", nullable = false)
     @JsonProperty("documentsValid")
- private Boolean documentsValid = false;
+ private boolean documentsValid = false;
     
-//    @Column(name = "admitted", nullable = false)
-//    @JsonProperty("admitted")
-//    private Boolean admitted = false;
-
+    @Column(name = "admitted", nullable = false)
+    @JsonProperty("admitted")
+ private boolean admitted = false;
+    
     @ManyToOne
     @JoinColumn(name = "seat_matrix_id", referencedColumnName = "id") 
     private SeatMatrix seatMatrix;
-
-    @Column(name = "admission_status", nullable = false)
-    @JsonProperty("admissionStatus")
-    private String admissionStatus = "not admitted";
     
     @Override
     public String toString() {
@@ -168,14 +161,6 @@ public class Student {
     public void setDob(LocalDate dob) {
         this.dob = dob;
     }
-//    public String getStanding() {
-//        return standing;
-//    }
-//
-//    public void setStanding(String standing) {
-//        this.standing = standing;
-//    }
-
     
     public String getStatus() {
         return status;
@@ -193,14 +178,6 @@ public class Student {
         this.documentsValid = documentsValid;
     }
 
-//    public boolean isAdmitted() {
-//        return admitted;
-//    }
-//
-//    public void setAdmitted(boolean admitted) {
-//        this.admitted = admitted;
-//    }
-//    
     public SeatMatrix getSeatMatrix() {
         return seatMatrix;
     }
@@ -209,12 +186,12 @@ public class Student {
         this.seatMatrix = seatMatrix;
     }
     
-    public String getAdmissionStatus() {
-        return admissionStatus;
-    }
+    public boolean isAdmitted() {
+      return admitted;
+  }
 
-    public void setAdmissionStatus(String admissionStatus) {
-        this.admissionStatus = admissionStatus;
-    }
+  public void setAdmitted(boolean admitted) {
+      this.admitted = admitted;
+  }
 
 }
