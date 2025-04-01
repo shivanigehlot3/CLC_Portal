@@ -4,7 +4,7 @@
     --navy-blue: #05445e;
     --blue-grotto: #189ab4;
     --blue-green: #75e6da;
-    --baby-blue: #d4f1f4;
+    --baby-blue: #c9f3f8;
     --white: #ffffff;
     --glass-bg: rgba(255, 255, 255, 0.2);
     --glass-border: rgba(255, 255, 255, 0.4);
@@ -23,11 +23,11 @@ body {
 
 .container {
     background: var(--white);
-    padding: 30px;
+    padding: 15px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 450px;
+    max-width: 600px;
     text-align: center;
     backdrop-filter: blur(10px);
     border: 1.5px solid var(--glass-border);
@@ -50,7 +50,7 @@ input, select, button {
     padding: 10px 12px;
     border: none;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     transition: all 0.3s;
 }
 
@@ -80,7 +80,7 @@ input, select {
 
 .form-group label {
     flex: 1;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     font-weight: 500;
     color: var(--navy-blue);
 }
@@ -89,7 +89,7 @@ input, select {
 .form-group select {
     flex: 2;
     padding: 10px;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     width: 100%;
 }
 
@@ -100,11 +100,11 @@ button {
     cursor: pointer;
     padding: 10px 20px;
     border-radius: 8px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     transition: background 0.3s, transform 0.2s;
-    width: 100%;
-    margin-top: 10px;
+    width: 80px;
+    margin: 10px auto;
 }
 
 button:hover {
@@ -113,13 +113,13 @@ button:hover {
 }
 
 .toggle-text {
-    font-size: 0.85rem;
-    color: rgb(51, 51, 51);
+    font-size: 0.7rem;
+    color: rgb(28, 27, 27);
     margin-top: 8px;
 }
 
 .toggle-text a {
-    color: var(--blue-green);
+    color: var(--blue-grotto);
     text-decoration: none;
     font-weight: 500;
 }
@@ -154,7 +154,7 @@ button:hover {
 }
 
 .popup-content p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--blue-grotto);
     font-weight: bold;
 }
@@ -164,7 +164,7 @@ button:hover {
     color: var(--white);
     padding: 10px 20px;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -203,14 +203,16 @@ button:hover {
     }
 }
 
-@media (min-width: 901px) {
-    .container {
-        max-width: 420px;
-    }
-}
 
 #studentFields .form-group input,
 #studentFields .form-group select {
     width: 100%;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
+}
+
+.row{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    gap: 20px;
 }
