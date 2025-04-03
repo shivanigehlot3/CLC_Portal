@@ -69,6 +69,13 @@ loginRole.addEventListener('change', () => {
     }
 });
 
+//Strong password function-->
+function isStrongPassword(password) {
+    //8 characters,1 uppercase letter,1 lowercase letter,1 number,1 special character
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return strongPasswordRegex.test(password);
+}
+
 registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     console.log("Register Button Clicked!");
@@ -77,6 +84,12 @@ registerForm.addEventListener('submit', async (e) => {
     const identifier = registerIdentifierInput.value;
     const password = document.getElementById('registerPassword').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
+
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!strongPasswordRegex.test(password)) {
+        showPopup('Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, and a number.');
+        return;
+    }
 
     if (password !== confirmPassword) {
         showPopup('Passwords do not match. Please try again.');
@@ -92,7 +105,6 @@ registerForm.addEventListener('submit', async (e) => {
             name: document.getElementById('registerName').value,
             branch: document.getElementById("registerBranch").value,
             rank: parseInt(document.getElementById('registerRank').value),
-            // standing: document.getElementById("registerStanding").value,
             email: document.getElementById('registerEmail').value,
             phoneNumber: document.getElementById('registerPhoneNumber').value,
             address: document.getElementById('registerAddress').value,
@@ -207,11 +219,6 @@ loginRole.dispatchEvent(new Event('change'));
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const registerForm = document.getElementById('registerForm');
-    const loginForm = document.getElementById('loginForm');
-    const loginLink = document.getElementById('loginLink');
-    const registerLink = document.getElementById('registerLink');
-
     loginForm.style.display = "none";
 
     loginLink.addEventListener("click", function (event) {
