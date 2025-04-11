@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             alert("Failed to fetch student data");
             return;
         }
-        const student = await response.json();
+        const student = await response.json();  //response obj return by fetch() to json object
 
         document.getElementById('user-name').textContent = student.name;
         document.getElementById('roll-number').textContent = student.rollNumber;
@@ -94,6 +94,7 @@ function goToStanding() {
     showSection('standings');
 }
 
+//student position in leaderboard acc to branch
 async function loadBranchLeaderboard() {
 const rollNumber = localStorage.getItem("rollNumber");
 if (!rollNumber) {
@@ -149,6 +150,7 @@ try {
     leaderboardTable.innerHTML = "<tr><td colspan='4'>Error fetching data</td></tr>";
 }
 
+    //Qualification Message
 function showQualificationMessage(status) {
 const messageDiv = document.getElementById("student-message");
 
