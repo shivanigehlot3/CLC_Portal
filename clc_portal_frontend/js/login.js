@@ -1,5 +1,7 @@
 console.log("Script Loaded!");
+
 const BASE_URL = "http://localhost:9091";
+
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 const loginLink = document.getElementById('loginLink');
@@ -69,12 +71,6 @@ loginRole.addEventListener('change', () => {
     }
 });
 
-//Strong password function-->
-function isStrongPassword(password) {
-    //8 characters,1 uppercase letter,1 lowercase letter,1 number,1 special character
-    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return strongPasswordRegex.test(password);
-}
 
 registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -85,7 +81,7 @@ registerForm.addEventListener('submit', async (e) => {
     const password = document.getElementById('registerPassword').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
-    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!strongPasswordRegex.test(password)) {
         showPopup('Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, and a number.');
         return;
@@ -94,6 +90,41 @@ registerForm.addEventListener('submit', async (e) => {
     if (password !== confirmPassword) {
         showPopup('Passwords do not match. Please try again.');
         return;
+    }
+
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    const phonePattern = /^[6-9]\d{9}$/;
+    if (role === "student") {
+        const email = document.getElementById("registerEmail").value;
+        const phone = document.getElementById("registerPhoneNumber").value;
+
+        if (!email.match(emailPattern)) {
+            e.preventDefault();
+            showPopup("Please enter a valid student email address.");
+            return;
+        }
+
+        if (!phone.match(phonePattern)) {
+            e.preventDefault();
+            showPopup("Please enter a valid student 10-digit phone number.");
+            return;
+        }
+
+    } else if (role === "officer") {
+        const email = document.getElementById("officerEmail").value;
+        const phone = document.getElementById("officerPhoneNumber").value;
+
+        if (!email.match(emailPattern)) {
+            e.preventDefault();
+            showPopup("Please enter a valid officer email address.");
+            return;
+        }
+
+        if (!phone.match(phonePattern)) {
+            e.preventDefault();
+            showPopup("Please enter a valid officer 10-digit phone number.");
+            return;
+        }
     }
 
     let registerData = {};
@@ -217,21 +248,3 @@ loginForm.addEventListener('submit', async (e) => {
 registerRole.dispatchEvent(new Event('change'));
 loginRole.dispatchEvent(new Event('change'));
 
-
-document.addEventListener("DOMContentLoaded", function () {
-    loginForm.style.display = "none";
-
-    loginLink.addEventListener("click", function (event) {
-        event.preventDefault();
-        registerForm.style.display = "none";
-        loginForm.style.display = "block";
-    });
-
-    registerLink.addEventListener("click", function (event) {
-        event.preventDefault();
-        loginForm.style.display = "none";
-        registerForm.style.display = "block";
-    });
-});
-
-console.log("Script Ended!");
