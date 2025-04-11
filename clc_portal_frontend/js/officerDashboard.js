@@ -170,15 +170,15 @@ function logout() {
     window.location.href = "login.html";
 }
 
-document.getElementById("load-students-btn").addEventListener("click", async function () {
+document.getElementById("admit-students").addEventListener("click", async function () {
     try {
-        const response = await fetch("http://localhost:9091/students/admitted");
+        const response = await fetch(`${BASE_URL}/students/admitted`);
         if (!response.ok) {
             throw new Error("Failed to fetch admitted students.");
         }
 
         const admittedStudents = await response.json();
-        console.log("✅ Admitted Students Fetched:", admittedStudents);
+        console.log("Admitted Students Fetched:", admittedStudents);
 
         const tableBody = document.getElementById("admitted-students-table");
         tableBody.innerHTML = "";
@@ -200,8 +200,6 @@ document.getElementById("load-students-btn").addEventListener("click", async fun
         });
 
     } catch (error) {
-        console.error("❌ Error fetching admitted students:", error);
+        console.error(" Error fetching admitted students:", error);
     }
 });
-
-window.onload = fetchStudents;
