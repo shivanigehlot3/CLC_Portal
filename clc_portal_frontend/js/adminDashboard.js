@@ -1,6 +1,6 @@
 const API_URL = "http://localhost:9091/admin";
 
-// 🔹 Fetch and display all admission officers
+//Fetch and display all admission officers
 async function loadOfficers() {
     try {
         let response = await fetch(`${API_URL}/officers`);
@@ -25,7 +25,7 @@ async function loadOfficers() {
     }
 }
 
-// 🔹 Add a new admission officer
+// Add a new admission officer
 async function addOfficer() {
     let name = document.getElementById("officerName").value;
     let username = document.getElementById("officerUsername").value;
@@ -62,10 +62,12 @@ async function addOfficer() {
     }
 }
 
-// 🔹 Remove an admission officer
+//Remove an admission officer
 async function removeOfficer(id) {
     try {
-        let response = await fetch(`${API_URL}/officer/${id}`, { method: "DELETE" });
+        let response = await fetch(`${API_URL}/officer/${id}`, { 
+            method: "DELETE" 
+        });
 
         if (response.ok) {
             document.getElementById("statusMessage").textContent = "Officer removed successfully!";
@@ -79,10 +81,10 @@ async function removeOfficer(id) {
 }
 
 
-// 🔹 Logout function
+// Logout function
 function logout() {
     alert("Admin logged out!");
-    window.location.href = "..html/login.html"; 
+    window.location.href = "login.html"; 
 }
 
 // Load officers when the page loads
