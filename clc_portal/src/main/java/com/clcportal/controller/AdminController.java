@@ -60,7 +60,7 @@ public class AdminController {
         return ResponseEntity.ok("Officer registered successfully!");
     }
 
-    // ✅ Admission Officer Login
+    // Admission Officer Login
     @PostMapping("/officer/login")
     public ResponseEntity<String> officerLogin(@RequestBody AdmissionOfficer loginRequest) {
         boolean isAuthenticated = adminService.officerLogin(loginRequest.getUsername(), loginRequest.getPassword());
