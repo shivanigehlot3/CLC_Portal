@@ -1,10 +1,8 @@
 package com.clcportal.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 @Entity
-@Data
 public class Admin {
 
     @Id
