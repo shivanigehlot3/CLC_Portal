@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.mail.javamail.JavaMailSender;
 
 import java.util.*;
 
@@ -23,9 +22,7 @@ public class StudentService {
 
     @Autowired
     private SeatMatrixRepository seatMatrixRepository;
-
-    @Autowired
-    private JavaMailSender mailSender;
+    
     public Student registerStudent(Student student) {
         if (studentRepository.findByRollNumber(student.getRollNumber()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Roll Number already registered!");
@@ -70,7 +67,7 @@ public class StudentService {
         BRANCH_RANK_CRITERIA.put("Management", new int[]{40, 60});
         BRANCH_RANK_CRITERIA.put("Forensic Science", new int[]{35, 55});
         BRANCH_RANK_CRITERIA.put("Law", new int[]{50, 70});
-        BRANCH_RANK_CRITERIA.put("Mass Communication", new int[]{50, 70});
+        BRANCH_RANK_CRITERIA.put("Mass Communication", new int[]{50, 70}); 
         BRANCH_RANK_CRITERIA.put("Pharmacy", new int[]{45, 65});
     }
 
@@ -141,21 +138,6 @@ public class StudentService {
         return student;
     }
 
-    public List<Student> getPendingStudentsByBranch(String branch) {
-        return studentRepository.findByBranchAndAdmittedFalse(branch);
-    }
-    public int getStudentFilledSeats(String rollNumber) {
-        Student student = studentRepository.findByRollNumber(rollNumber)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found"));
-
-        SeatMatrix seatMatrix = student.getSeatMatrix();
-        if (seatMatrix == null) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "SeatMatrix is not assigned for this student.");
-        }
-
-        return seatMatrix.getFilledSeats();
-    }
-
     public Optional<Student> findNextEligibleStudent() {
         Optional<Student> student = studentRepository.findEligibleStudent();
         student.ifPresentOrElse(
@@ -168,19 +150,7 @@ public class StudentService {
     public void save(Student student) {
         studentRepository.save(student);
     }
-    
-    public void sendNotification(String email, String message) {
-        System.out.println("Sending email to " + email + ": " + message);
-    
-        /*
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(email);
-        mailMessage.setSubject("Admission Update");
-        mailMessage.setText(message);
-        mailSender.send(mailMessage);
-        */
-    }
-    
+
     
     public List<Student> getAdmittedStudents() {
         return studentRepository.findByAdmittedTrue();
